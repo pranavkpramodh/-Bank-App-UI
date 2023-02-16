@@ -1,0 +1,110 @@
+
+
+<div class="delete-alert" style="position: absolute; color: rgb(255, 255, 255); font-size: 16px;  left: 50%; z-index: 9999; transform: translate(-50%); border-radius: 60px;  width: 500px; background-color: rgba(0, 0, 0, 0.818);">
+    <app-delete [item]="acno" (onCancel)="onCancel()" (onDelete)="onDelete($event)"></app-delete>
+</div>
+
+<div class="parent" [ngClass]="acno? 'style1':''" >
+  
+    <div class="child1">
+        
+        <div class="container">
+            <div class="signup" >
+                <div class="box-container">
+                    <h4 style="position: absolute; left: 30px; top: 20px; font-size: 13px;font-weight: 300; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; ">{{sdate | date:'short'}}</h4>
+
+                  <div class="menu">
+                    <div (click)="menuShow()" style="position: absolute; cursor: pointer; right: 30px; top: 20px;"><i  class="fa-solid fa-ellipsis-vertical" style="font-size: 30px;"></i></div>
+                    <div>
+                        <div  *ngIf="showMenu" class="logoutbtn" style="position: absolute; top: 50px; right: -220px; ">
+                            <div class="show-menu" style="background-color: rgba(0, 0, 0, 0.549); border-end-end-radius: 20px;  border-bottom-left-radius: 20px; border-top-right-radius: 20px; z-index: 9; display: flex; justify-content: center; flex-direction: column; align-items: center; width: 250px; height: 150px;">
+                            <div style="display: flex;"><button class="logout" (click)="logout()">Logout</button>
+                            <button class="delete" (click)="delete()">Delete</button></div>
+                            <a class="his" style="font-size: 16px; color: white;" routerLink="/transaction">Transaction History</a>
+
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                <div class="left-img" style="position: relative;">
+                    <div class="title" style="width: 100%; display: flex; justify-content: center;">
+                        <h1 style="color: rgb(0, 62, 125); font-size: 25px; font-weight: 300; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Welcome {{user}}</h1>
+                        </div>
+                    <img src="https://img.freepik.com/free-vector/digital-education-internet-conference-online-tech-talks-technical-topics-presentations-tech-webinars-live-technology-demonstration-concept-pinkish-coral-bluevector-isolated-illustration_335657-1252.jpg?w=2000" alt="">
+                    <button id="bt" (click)="withdrawShow()" style="position: absolute; left: 50%; bottom: -30px; transform: translate(-50%);">Withdraw</button>
+                    <button  *ngIf="showWithdraw" id="bt" (click)="withdrawShow()" style="position: absolute; left: 50%; bottom: -30px; transform: translate(-50%);">Deposit</button>
+
+                </div>
+                
+                <div class="box" style="position: relative;">
+                    <div><img src="../../assets/images/Banks.jpg" alt=""></div>
+                <h1 style="letter-spacing: 2px; font-weight: 300;">Deposit</h1>
+
+                <form [formGroup]="depositForm" style="position: relative;">
+                
+                <div class="error-container">
+                <div><input formControlName="acno" id="depo_acno" name="acno" type="text" placeholder="enter account number" autocomplete="off"></div>
+                <div  class="error" *ngIf="this.depositForm.get('acno')?.errors && this.depositForm.get('acno')?.touched" style="color: red;">invalid account number</div>
+                </div>
+
+                <div class="error-container">
+                <div><input formControlName="pswd" id="depo_pswd" name="pswd" type="password" placeholder="Enter Password" autocomplete="off"></div>
+                <div class="error" *ngIf="this.depositForm.get('pswd')?.errors && this.depositForm.get('pswd')?.touched" style="color: red;">invalid password</div>
+                </div>
+
+                <div class="error-container">
+                <div><input formControlName="amt" id="depo_amt" name="amt" type="text" placeholder="Enter Amount" autocomplete="off"></div>
+                <div class="error" *ngIf="this.depositForm.get('amt')?.errors && this.depositForm.get('amt')?.touched" style="color: red;">invalid amount</div>
+                </div>
+
+                <div><button id="register" (click)="deposit()" type="button">Deposit</button></div>
+            </form>
+
+
+
+            <div *ngIf="showWithdraw" class="child2" style="position: absolute; left: -60px; top: -149px; z-index: 9;">
+                <div class="container">
+                    <div class="signup">
+                        
+                        <div class="box">
+                            <div><img src="../../assets/images/Banks.jpg" alt=""></div>
+                        <h1 style="letter-spacing: 2px; font-weight: 500;">Withdraw</h1>
+        
+                       
+                        <form [formGroup]="withdrawForm">
+        
+                        <div><input formControlName="acno1" id="withdraw_acno" name="acno" type="text" placeholder="enter account number" autocomplete="off"></div>
+                        <div *ngIf="this.withdrawForm.get('acno1')?.errors && this.withdrawForm.get('acno1')?.touched" style="color: red;">invalid account number</div>
+        
+                        <div><input formControlName="pswd1" id="withdraw_pswd" name="pswd" type="password" placeholder="Enter Password" autocomplete="off"></div>
+                        <div *ngIf="this.withdrawForm.get('pswd1')?.errors && this.withdrawForm.get('pswd1')?.touched" style="color: red;">invalid password</div>
+        
+                        <div><input formControlName="amt1" id="withdraw_amt" name="amt" type="text" placeholder="Enter Amount" autocomplete="off"></div>
+                        <div *ngIf="this.withdrawForm.get('amt1')?.errors && this.withdrawForm.get('amt1')?.touched" style="color: red;">invalid amount</div>
+        
+                        <div><button id="register" (click)="withdraw()" type="button">Withdraw</button></div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                
+            </div>
+      
+
+
+        </div>
+            </div>
+
+
+             </div>
+        </div>        
+    </div>
+
+
+
+    <!-- withdrow -->
+   
+</div>
+
+
+
